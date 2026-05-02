@@ -1,0 +1,16 @@
+services:
+  playwright:
+    build: .
+    volumes:
+      # ホストのテストファイルをコンテナにマウント（編集がリアルタイムで反映）
+      - ./tests:/app/tests
+      - ./playwright.config.ts:/app/playwright.config.ts
+      - ./eslint.config.js:/app/eslint.config.js
+      - ./tsconfig.json:/app/tsconfig.json
+      # テスト結果・レポートをホストに出力
+      - ./playwright-report:/app/playwright-report
+      - ./test-results:/app/test-results
+    ports:
+      - "9323:9323"
+    environment:
+      - CI=true

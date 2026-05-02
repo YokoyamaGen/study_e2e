@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILE=$(jq -r '.tool_input.file_path // empty' 2>/dev/null); echo \"$FILE\" | grep -qE 'tests/.*\\.ts$' || exit 0; cd /Users/yokoyamagen/playwright && LINT_OUT=$(npm run lint:fix 2>&1); LINT_CODE=$?; [ $LINT_CODE -eq 0 ] && exit 0; { echo \"=== Lint エラー ===\"; echo \"$LINT_OUT\"; } >&2; exit 2",
+            "statusMessage": "lint を実行中...",
+            "asyncRewake": true
+          }
+        ]
+      }
+    ]
+  }
+}
