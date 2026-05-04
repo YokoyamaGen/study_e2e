@@ -2,7 +2,7 @@ name: Lint
 
 on:
   pull_request:
-    branches-ignore:
+    branches:
       - main
 
 jobs:
@@ -19,3 +19,4 @@ jobs:
       - run: npm ci
 
       - run: npm run lint
+
